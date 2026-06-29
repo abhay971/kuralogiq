@@ -1,0 +1,209 @@
+@import 'tailwindcss';
+
+/* Self-hosted variable fonts (free stand-ins for the licensed Figma fonts).
+   Swap order in --font-display / --font-sans once you add PP Editorial New
+   and Switzer .woff2 files (drop them in src/assets/fonts + @font-face). */
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/inter';
+
+/* ------------------------------------------------------------------
+   Design tokens (Tailwind v4 CSS-first config) — pulled from Figma.
+   Every token becomes a utility automatically, e.g. `text-ink`, `bg-paper`.
+   ------------------------------------------------------------------ */
+@theme {
+  /* Neutrals */
+  --color-ink: #020201;
+  --color-paper: #ffffff;
+  --color-muted: #6b6b6b;
+  --color-line: rgba(225, 225, 225, 0.3);
+
+  /* Brand gradient stops */
+  --color-orange-light: #f9976a;
+  --color-orange: #f47549;
+  --color-orange-dark: #ee5327;
+
+  --color-yellow-light: #ffde64;
+  --color-yellow: #ffc833;
+  --color-yellow-dark: #ffb301;
+
+  --color-teal-light: #59f2c2;
+  --color-teal: #36c195;
+  --color-teal-dark: #139069;
+
+  --color-graphite: #343434;
+
+  /* Typography */
+  --font-display: 'PP Editorial New', 'Fraunces Variable', Georgia, serif;
+  --font-sans: 'Switzer', 'Inter Variable', system-ui, sans-serif;
+
+  /* Fluid type scale (clamp = responsive without breakpoints) */
+  --text-hero: clamp(2.25rem, 1.3rem + 3.4vw, 4rem); /* ~36 → 64px */
+  --text-h2: clamp(1.75rem, 1.1rem + 2.8vw, 3rem); /* ~28 → 48px */
+  --text-h3: clamp(1.5rem, 1.1rem + 1.7vw, 2rem); /* ~24 → 32px */
+  --text-lead: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); /* ~16 → 20px */
+  --text-fluid-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+
+  /* Layout */
+  --container-max: 1328px;
+
+  /* Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------
+   Base / reset layer
+   ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    --header-h: 6rem;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Display serif (Fraunces stand-in for PP Editorial New): high optical size
+     + lighter weight = the thin, high-contrast, elegant editorial look. */
+  .font-display {
+    font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+    font-weight: 420;
+    letter-spacing: -0.015em;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  /* Lenis smooth-scroll required styles */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  img,
+  video,
+  canvas {
+    @apply block max-w-full;
+  }
+
+  /* Aceternity spotlight sweep (used by Spotlight.jsx) */
+  @keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: translate(-72%, -62%) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -40%) scale(1);
+    }
+  }
+  .animate-spotlight {
+    animation: spotlight 2s ease 0.6s 1 forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Reusable design primitives
+   ------------------------------------------------------------------ */
+
+/* Page content container */
+@utility container-px {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--container-max);
+  padding-inline: clamp(1.25rem, 0.5rem + 4vw, 6.25rem);
+}
+
+/* GPU hint for animated elements */
+@utility will-animate {
+  will-change: transform, opacity;
+}
+
+/* Brand gradient fills (approximate the Figma radial gradients) */
+@utility bg-grad-orange {
+  background-image: linear-gradient(
+    160deg,
+    var(--color-orange-light),
+    var(--color-orange) 50%,
+    var(--color-orange-dark)
+  );
+}
+@utility bg-grad-yellow {
+  background-image: linear-gradient(
+    160deg,
+    var(--color-yellow-light),
+    var(--color-yellow) 50%,
+    var(--color-yellow-dark)
+  );
+}
+@utility bg-grad-teal {
+  background-image: linear-gradient(
+    160deg,
+    var(--color-teal-light),
+    var(--color-teal) 50%,
+    var(--color-teal-dark)
+  );
+}
+@utility bg-grad-dark {
+  background-image: linear-gradient(to top, #000000, var(--color-graphite));
+}
+
+/* Gradient text helpers */
+@utility text-grad-orange {
+  background-image: linear-gradient(
+    160deg,
+    var(--color-orange-light),
+    var(--color-orange) 50%,
+    var(--color-orange-dark)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility text-grad-teal {
+  background-image: linear-gradient(
+    160deg,
+    var(--color-teal-light),
+    var(--color-teal) 50%,
+    var(--color-teal-dark)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility text-grad-yellow {
+  background-image: linear-gradient(
+    160deg,
+    var(--color-yellow-light),
+    var(--color-yellow) 50%,
+    var(--color-yellow-dark)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
