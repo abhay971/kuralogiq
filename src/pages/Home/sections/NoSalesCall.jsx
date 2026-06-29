@@ -10,8 +10,10 @@ import specialtiesIcon from '@/assets/icons/nosales-specialties.svg'
 
 /**
  * NoSalesCall — centered serif headline + a dark "Book Now" pill, ringed by
- * four glassy trust badges. Badges float around the heading on desktop and
- * collapse into a tidy grid below the CTA on small screens.
+ * four glassy trust badges. On desktop the badges fly in from off the left/right
+ * edges as the section scrolls in, float beside the heading, then slide back out
+ * and fade as the section scrolls away (scrubbed to scroll position). On small
+ * screens they collapse into a tidy grid below the CTA with a simple reveal.
  */
 const BADGES = [
   {
@@ -19,6 +21,7 @@ const BADGES = [
     label: 'AI-Assisted Workflows',
     circle: 'bg-[#ffc801]',
     iconSize: 'size-[18px]',
+    side: 'left',
     float: 'left-0 top-[14%] -rotate-3',
   },
   {
@@ -26,6 +29,7 @@ const BADGES = [
     label: 'One Connected Platform',
     circle: null, // the icon is its own 40px badge
     iconSize: 'size-10',
+    side: 'right',
     float: 'right-0 top-[20%] rotate-3',
   },
   {
@@ -33,6 +37,7 @@ const BADGES = [
     label: 'Built for 4 Specialties',
     circle: 'bg-[#d66519]',
     iconSize: 'size-5',
+    side: 'left',
     float: 'left-[3%] bottom-[16%] rotate-3',
   },
   {
@@ -40,14 +45,15 @@ const BADGES = [
     label: 'Multi-Location Ready',
     circle: 'bg-[#329a79]',
     iconSize: 'size-5',
+    side: 'right',
     float: 'right-[3%] bottom-[12%] -rotate-3',
   },
 ]
 
-function Badge({ icon, label, circle, iconSize, className, nowrap = false }) {
+function Badge({ icon, label, circle, iconSize, className, nowrap = false, ...rest }) {
   return (
     <div
-      data-reveal
+      {...rest}
       className={cn(
         'will-animate flex items-center gap-2 rounded-full border-4 border-line',
         'bg-gradient-to-r from-[#f2f2f2] to-[#ebebeb] py-2 pl-2 pr-5',
@@ -81,6 +87,8 @@ export default function NoSalesCall() {
   useGSAP(
     () => {
       if (reduceMotion) return
+
+      // Heading + button (and the mobile badge grid) — simple one-shot reveal.
       gsap.from('[data-reveal]', {
         opacity: 0,
         y: 48,
@@ -89,6 +97,53 @@ export default function NoSalesCall() {
         ease: 'power3.out',
         scrollTrigger: { trigger: root.current, start: 'top 80%' },
       })
+
+      // Floating badges (desktop only).
+      const mm = gsap.matchMedia()
+      mm.add('(min-width: 1024px)', () => {
+        const left = gsap.utils.toArray('[data-badge="left"]', root.current)
+        const right = gsap.utils.toArray('[data-badge="right"]', root.current)
+        const all = [...left, ...right]
+
+        // 1) Smooth, self-playing entrance — fly in from off the edges and settle.
+        const tlIn = gsap.timeline({
+          scrollTrigger: {
+            trigger: root.current,
+            start: 'top 72%',
+            toggleActions: 'play none none reverse',
+          },
+        })
+        tlIn
+          .from(left, { xPercent: -170, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.12 }, 0)
+          .from(right, { xPercent: 170, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.12 }, 0)
+
+        // 2) Gentle, endless float once settled (y only → no conflict with x/opacity).
+        all.forEach((el, i) => {
+          gsap.to(el, {
+            y: i % 2 === 0 ? -10 : -14,
+            duration: 2.6 + i * 0.25,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+            delay: 0.5,
+          })
+        })
+
+        // 3) Disappear as the section scrolls up out of view (scrubbed fade + shrink).
+        gsap.to(all, {
+          autoAlpha: 0,
+          scale: 0.9,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: root.current,
+            start: 'center 30%',
+            end: 'bottom top',
+            scrub: true,
+          },
+        })
+      })
+
+      return () => mm.revert()
     },
     { scope: root, dependencies: [reduceMotion] }
   )
@@ -100,8 +155,12 @@ export default function NoSalesCall() {
         {BADGES.map((b) => (
           <Badge
             key={b.label}
-            {...b}
+            icon={b.icon}
+            label={b.label}
+            circle={b.circle}
+            iconSize={b.iconSize}
             nowrap
+            data-badge={b.side}
             className={cn('absolute z-10 hidden lg:flex', b.float)}
           />
         ))}
@@ -127,7 +186,14 @@ export default function NoSalesCall() {
           {/* Badges grid — mobile / tablet */}
           <div className="mt-12 grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:hidden">
             {BADGES.map((b) => (
-              <Badge key={b.label} {...b} />
+              <Badge
+                key={b.label}
+                data-reveal
+                icon={b.icon}
+                label={b.label}
+                circle={b.circle}
+                iconSize={b.iconSize}
+              />
             ))}
           </div>
         </div>

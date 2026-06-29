@@ -31,6 +31,10 @@ export default function Hero() {
       className="relative overflow-hidden"
       style={{
         background: [
+          // white fade at the very bottom so the hero's bottom edge is uniformly
+          // #ffffff across the full width — seamless with the white section below
+          // (no seam / bifurcation line).
+          'linear-gradient(180deg, rgba(255,255,255,0) 82%, #ffffff 97%)',
           // bright yellow side-glows (Figma plus-lighter ellipses)
           'radial-gradient(46% 38% at 0% 60%, rgba(255,221,64,0.92), rgba(255,221,64,0) 72%)',
           'radial-gradient(46% 38% at 100% 60%, rgba(255,221,64,0.92), rgba(255,221,64,0) 72%)',
