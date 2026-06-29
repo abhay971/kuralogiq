@@ -57,7 +57,7 @@ export default function TakeTheDemo() {
     <section
       id="pricing"
       ref={root}
-      className="bg-white pt-14 pb-8 md:pt-20 md:pb-10"
+      className="bg-paper pt-14 pb-8 md:pt-20 md:pb-10"
     >
       <div className="container-px">
         <div

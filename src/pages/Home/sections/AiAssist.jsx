@@ -1,13 +1,14 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap, useGSAP } from '@/animations/gsap'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 /**
  * AiAssist — "AI that assists. Clinicians who decide."
- * Left: heading + copy. Right: AI cards on a 3D ROLODEX/drum — each card sits
- * on a horizontal cylinder; the front card rests flat, then rolls up and over
- * the top as the next rolls up from below. Continuous loop with a brief rest at
- * front for readability. Honors reduced-motion (static front card).
+ * Left: heading + copy. Right: AI capability cards as a STACK/DECK — the front
+ * card is prominent with the others peeking below it. On each beat the front card
+ * lifts up and out, then tucks to the back of the stack while the rest promote
+ * forward (next becomes front). Continuous loop. Honors reduced-motion (static
+ * stack, no cycling).
  */
 const CARDS = [
   { title: 'AI-Assisted Documentation', desc: 'Draft notes and visit summaries faster.' },
@@ -16,12 +17,21 @@ const CARDS = [
   { title: 'Ambient Scribe', desc: 'Turn conversations into structured notes.' },
 ]
 
-const RADIUS = 150 // cylinder radius (px)
-const STEP = 360 / CARDS.length
+const N = CARDS.length
+
+// Where a card sits given its depth in the stack (0 = front).
+const place = (slot) => ({
+  y: slot * 16,
+  scale: 1 - slot * 0.05,
+  zIndex: N - slot,
+})
+const slotOf = (card, front) => (card - front + N) % N
 
 export default function AiAssist() {
   const root = useRef(null)
   const reduceMotion = useReducedMotion()
+  const [front, setFront] = useState(0)
+  const prevFront = useRef(null)
 
   // Reveal on scroll
   useGSAP(
@@ -39,35 +49,55 @@ export default function AiAssist() {
     { scope: root, dependencies: [reduceMotion] }
   )
 
-  // 3D rolodex drum
+  // Advance the deck on a slow, calm beat.
   useEffect(() => {
-    const cards = gsap.utils.toArray('[data-card]', root.current)
-    const drum = { angle: 0 }
-
-    // Position every card on the cylinder for the current drum angle.
-    const render = () => {
-      cards.forEach((el, i) => {
-        const deg = i * STEP + drum.angle
-        const facing = Math.cos((deg * Math.PI) / 180) // 1 = front, <0 = back
-        el.style.transform = `rotateX(${deg}deg) translateZ(${RADIUS}px)`
-        el.style.opacity = facing > 0.04 ? String(0.18 + facing * 0.82) : '0'
-        el.style.zIndex = String(Math.round((facing + 1) * 100))
-      })
-    }
-
-    render()
     if (reduceMotion) return
-
-    // Step the drum one card every cycle: quick flip, then rest at front.
-    const id = setInterval(() => {
-      gsap.to(drum, { angle: drum.angle - STEP, duration: 0.95, ease: 'power3.inOut', onUpdate: render })
-    }, 3000)
-
-    return () => {
-      clearInterval(id)
-      gsap.killTweensOf(drum)
-    }
+    const id = setInterval(() => setFront((f) => (f + 1) % N), 4200)
+    return () => clearInterval(id)
   }, [reduceMotion])
+
+  // Place / re-shuffle the deck whenever the front card changes.
+  useGSAP(
+    () => {
+      const cards = gsap.utils.toArray('[data-card]', root.current)
+      const outgoing = prevFront.current // card index that was at the front
+
+      // First render (or reduced motion): drop every card straight into its slot.
+      if (outgoing === null || reduceMotion) {
+        cards.forEach((el, c) => {
+          const p = place(slotOf(c, front))
+          gsap.set(el, { y: p.y, scale: p.scale, zIndex: p.zIndex, autoAlpha: 1 })
+        })
+        prevFront.current = front
+        return
+      }
+
+      cards.forEach((el, c) => {
+        const p = place(slotOf(c, front))
+
+        if (c === outgoing) {
+          // Lift the old front up, fade it as it rises, then let it glide back
+          // DOWN into the rear slot — one continuous arc, no hard teleport.
+          const back = place(N - 1)
+          gsap
+            .timeline({ defaults: { ease: 'sine.inOut' } })
+            .set(el, { zIndex: N + 2 })
+            .to(el, { y: -84, scale: 1.05, duration: 1.0 })
+            .to(el, { autoAlpha: 0, duration: 0.6 }, '<0.4')
+            // reposition behind the deck while fully hidden (no visible jump)
+            .set(el, { zIndex: back.zIndex, y: back.y + 46, scale: back.scale })
+            .to(el, { y: back.y, autoAlpha: 1, duration: 1.0 })
+        } else {
+          // Everyone else promotes one step forward at the same calm pace.
+          gsap.set(el, { zIndex: p.zIndex })
+          gsap.to(el, { y: p.y, scale: p.scale, autoAlpha: 1, duration: 1.1, ease: 'sine.inOut' })
+        }
+      })
+
+      prevFront.current = front
+    },
+    { scope: root, dependencies: [front, reduceMotion] }
+  )
 
   return (
     <section id="ai" ref={root} className="py-20 md:py-28 lg:py-32">
@@ -88,21 +118,21 @@ export default function AiAssist() {
           </p>
         </div>
 
-        {/* Right — 3D rolodex drum */}
+        {/* Right — card deck */}
         <div data-reveal className="will-animate relative mx-auto w-full max-w-[560px]">
-          <div className="relative h-[300px] [perspective:1100px]">
+          <div className="relative h-[230px] sm:h-[250px]">
             {CARDS.map((card) => (
               <div
                 key={card.title}
                 data-card
-                className="bg-grad-orange absolute inset-x-0 top-1/2 -mt-[75px] flex h-[150px] items-center gap-5 rounded-[16px] p-6 text-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] [backface-visibility:hidden] sm:-mt-[85px] sm:h-[170px] sm:gap-6 sm:p-8"
+                className="bg-grad-orange absolute inset-x-0 top-4 flex h-[150px] items-center gap-5 rounded-[18px] p-6 text-white shadow-[0_18px_40px_rgba(244,117,73,0.30)] sm:h-[168px] sm:gap-6 sm:p-8"
               >
-                <div className="size-16 shrink-0 rounded-[8px] border-4 border-white/20 bg-gradient-to-b from-[#fefeff] to-[#f1f2f5] sm:size-[96px]" />
+                <div className="size-16 shrink-0 rounded-[10px] border-4 border-white/20 bg-gradient-to-b from-[#fefeff] to-[#f1f2f5] sm:size-[84px]" />
                 <div className="flex min-w-0 flex-col gap-1">
                   <p className="font-sans text-xl font-bold leading-tight text-balance sm:text-2xl">
                     {card.title}
                   </p>
-                  <p className="font-sans text-fluid-sm font-light text-white/75">{card.desc}</p>
+                  <p className="font-sans text-fluid-sm font-light text-white/80">{card.desc}</p>
                 </div>
               </div>
             ))}

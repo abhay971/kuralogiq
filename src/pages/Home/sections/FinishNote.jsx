@@ -86,14 +86,14 @@ export default function FinishNote() {
               KURALOGIQ transforms structured inputs into clear, compliant notes in real time,
               helping providers spend less time typing and more time treating patients.
             </p>
-            <Button
-              data-reveal
-              href="#ai"
-              variant="dark"
-              className="mt-2 border-4 border-white/20"
-            >
-              Explore Charting
-            </Button>
+            {/* Wrap in a plain div for the reveal — putting data-reveal directly
+                on Button conflicts with its CSS opacity transition and the GSAP
+                tween leaves it stuck at opacity 0. */}
+            <div data-reveal className="mt-2">
+              <Button href="#ai" variant="dark" className="border-4 border-white/20">
+                Explore Charting
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -103,7 +103,7 @@ export default function FinishNote() {
             <div
               key={feature.title}
               data-reveal
-              className="flex items-center gap-4 rounded-[48px] border-4 border-line bg-white py-2 pl-2 pr-6 shadow-[0_0_18px_rgba(0,0,0,0.06)]"
+              className="flex items-center gap-4 rounded-full bg-white py-2 pl-2 pr-7 shadow-[0_14px_34px_rgba(0,0,0,0.10)]"
             >
               <span
                 className={`flex size-[84px] shrink-0 items-center justify-center rounded-full ${feature.gradient}`}
@@ -111,8 +111,10 @@ export default function FinishNote() {
                 <img src={feature.icon} alt="" aria-hidden="true" className="size-9" />
               </span>
               <span className="flex flex-col gap-1">
-                <span className="font-sans text-lg font-bold text-ink">{feature.title}</span>
-                <span className="font-sans text-fluid-sm font-medium text-ink/70">
+                <span className="font-sans text-lg font-bold leading-tight text-ink">
+                  {feature.title}
+                </span>
+                <span className="font-sans text-fluid-sm font-medium leading-snug text-ink/75">
                   {feature.description}
                 </span>
               </span>

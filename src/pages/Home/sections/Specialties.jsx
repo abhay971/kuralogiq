@@ -13,11 +13,14 @@ import integrativeIcon from '@/assets/icons/specialty-integrative.svg'
  * link. Themes: Chiropractic (orange), Nutrition (yellow), Mental Health
  * (teal), Integrative Medicine (dark).
  */
+// Softer panel gradients (saturated near the top, easing lighter toward the
+// white fade at the bottom) — matches the Figma card look better than the full
+// light→base→dark brand utilities, which read too harsh here.
 const CARDS = [
   {
     name: 'Chiropractic',
     icon: chiropracticIcon,
-    panel: 'bg-grad-orange',
+    grad: 'linear-gradient(180deg, var(--color-orange), var(--color-orange-light))',
     title: 'text-grad-orange',
     body: 'Guided SOAP notes, spine-level charting, CMT coding, and outcome tracking.',
     link: 'Explore Chiropractic',
@@ -25,7 +28,7 @@ const CARDS = [
   {
     name: 'Nutrition & Dietetics',
     icon: nutritionIcon,
-    panel: 'bg-grad-yellow',
+    grad: 'linear-gradient(180deg, var(--color-yellow), var(--color-yellow-light))',
     title: 'text-grad-yellow',
     body: 'Food journals, meal plans, supplement tracking, and metabolic markers.',
     link: 'Explore Nutrition',
@@ -33,7 +36,7 @@ const CARDS = [
   {
     name: 'Mental Health',
     icon: mentalHealthIcon,
-    panel: 'bg-grad-teal',
+    grad: 'linear-gradient(180deg, var(--color-teal), var(--color-teal-light))',
     title: 'text-grad-teal',
     body: 'PHQ-9, GAD-7, DSM-5 coding, therapy goals, and teletherapy workflows.',
     link: 'Explore Mental Health',
@@ -41,8 +44,8 @@ const CARDS = [
   {
     name: 'Integrative Medicine',
     icon: integrativeIcon,
-    panel: 'bg-grad-dark',
-    title: 'text-white',
+    grad: 'linear-gradient(180deg, #000000, var(--color-graphite))',
+    title: 'text-ink',
     body: 'Functional labs, protocols, supplement plans, and whole-person care tracking.',
     link: 'Explore Integrative Medicine',
   },
@@ -68,7 +71,11 @@ export default function Specialties() {
   )
 
   return (
-    <section id="specialties" ref={root} className="py-20 md:py-28 lg:py-32">
+    <section
+      id="specialties"
+      ref={root}
+      className="pt-12 pb-20 md:pt-16 md:pb-28 lg:pt-20 lg:pb-32"
+    >
       <div className="container-px flex flex-col gap-14 md:gap-20">
         <SectionHeading
           title="Built for the way you practice."
@@ -83,20 +90,21 @@ export default function Specialties() {
               className="will-animate flex h-full flex-col rounded-[24px] border-4 border-line bg-white p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.02)]"
             >
               <div
-                className={`relative flex aspect-[5/4] items-center justify-center overflow-hidden rounded-[18px] ${card.panel}`}
+                className="relative flex aspect-[5/4] items-center justify-center overflow-hidden rounded-[18px]"
+                style={{ backgroundImage: card.grad }}
               >
                 <img
                   src={card.icon}
                   alt=""
                   aria-hidden="true"
-                  className="h-20 w-20 object-contain md:h-24 md:w-24"
+                  className="h-16 w-16 object-contain md:h-20 md:w-20"
                 />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-white" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-transparent to-white" />
               </div>
 
               <div className="flex flex-1 flex-col gap-2 px-2.5 pb-2.5 pt-5">
                 <h3
-                  className={`font-display text-h3 leading-tight ${card.title}`}
+                  className={`font-display text-2xl leading-tight ${card.title}`}
                 >
                   {card.name}
                 </h3>

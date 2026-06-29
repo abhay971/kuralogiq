@@ -105,19 +105,8 @@ export default function NoSalesCall() {
         const right = gsap.utils.toArray('[data-badge="right"]', root.current)
         const all = [...left, ...right]
 
-        // 1) Smooth, self-playing entrance — fly in from off the edges and settle.
-        const tlIn = gsap.timeline({
-          scrollTrigger: {
-            trigger: root.current,
-            start: 'top 72%',
-            toggleActions: 'play none none reverse',
-          },
-        })
-        tlIn
-          .from(left, { xPercent: -170, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.12 }, 0)
-          .from(right, { xPercent: 170, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.12 }, 0)
-
-        // 2) Gentle, endless float once settled (y only → no conflict with x/opacity).
+        // Gentle, endless idle float — y axis only, so it never touches the
+        // xPercent / autoAlpha / scale that the entrance timeline below owns.
         all.forEach((el, i) => {
           gsap.to(el, {
             y: i % 2 === 0 ? -10 : -14,
@@ -125,22 +114,32 @@ export default function NoSalesCall() {
             ease: 'sine.inOut',
             repeat: -1,
             yoyo: true,
-            delay: 0.5,
           })
         })
 
-        // 3) Disappear as the section scrolls up out of view (scrubbed fade + shrink).
-        gsap.to(all, {
-          autoAlpha: 0,
-          scale: 0.9,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: root.current,
-            start: 'center 30%',
-            end: 'bottom top',
-            scrub: true,
-          },
-        })
+        // Fly the badges in from the edges whenever the section is on screen,
+        // and reverse them out as it leaves — handled in BOTH scroll directions
+        // via toggleActions (enter / leave / enter-back / leave-back). This is
+        // what makes them reappear when scrolling bottom → top, not just down.
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: root.current,
+              start: 'top 80%', // section enters the lower viewport
+              end: 'bottom 20%', // section exits the upper viewport
+              toggleActions: 'play reverse play reverse',
+            },
+          })
+          .from(
+            left,
+            { xPercent: -120, autoAlpha: 0, scale: 0.9, duration: 0.9, ease: 'power3.out', stagger: 0.1 },
+            0
+          )
+          .from(
+            right,
+            { xPercent: 120, autoAlpha: 0, scale: 0.9, duration: 0.9, ease: 'power3.out', stagger: 0.1 },
+            0
+          )
       })
 
       return () => mm.revert()
@@ -149,7 +148,10 @@ export default function NoSalesCall() {
   )
 
   return (
-    <section ref={root} className="relative overflow-hidden py-20 md:py-28 lg:py-32">
+    <section
+      ref={root}
+      className="relative overflow-hidden pt-20 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20"
+    >
       <div className="container-px relative">
         {/* Floating badges — desktop only */}
         {BADGES.map((b) => (

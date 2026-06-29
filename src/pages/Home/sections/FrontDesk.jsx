@@ -7,7 +7,7 @@ import Button from '@/components/ui/Button'
 /**
  * FrontDesk — "A front desk that runs itself." A 3-card coverflow: prominent
  * teal center card with white cards peeking on both sides. Cards flow
- * LEFT → CENTER → RIGHT so each feature takes the center in turn, looping.
+ * RIGHT → CENTER → LEFT so each feature takes the center in turn, looping.
  *
  * Smoothness: every card is a white base with a teal layer + text/icon colors
  * that CROSSFADE (opacity/color are tween-able; gradients are not). So the
@@ -52,17 +52,17 @@ export default function FrontDesk() {
     { scope: root, dependencies: [reduceMotion] }
   )
 
-  // Advance so the next card slides in from the LEFT into the center (L→R flow).
+  // Advance so the next card slides in from the RIGHT into the center (R→L flow).
   useEffect(() => {
     if (reduceMotion) return
-    const id = setInterval(() => setActive((a) => (a - 1 + N) % N), 3200)
+    const id = setInterval(() => setActive((a) => (a + 1) % N), 3200)
     return () => clearInterval(id)
   }, [reduceMotion])
 
   return (
     <section
       ref={root}
-      className="relative overflow-hidden bg-white pt-20 pb-[46rem] md:pt-28 md:pb-[54rem] lg:pt-32"
+      className="relative overflow-hidden bg-paper pt-20 pb-[46rem] md:pt-28 md:pb-[54rem] lg:pt-32"
     >
       {/* Warm transition band — the gradient begins AFTER the content:
           vivid yellow (with side-glows) → orange → dark, with a center line. */}

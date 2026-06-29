@@ -17,4 +17,11 @@ gsap.defaults({
 // Slightly throttles ScrollTrigger work on resize for smoother perf.
 ScrollTrigger.config({ ignoreMobileResize: true })
 
+// We own scroll position. By default ScrollTrigger forces
+// history.scrollRestoration back to "auto" on every refresh() — which makes the
+// browser restore the prior scroll on reload (landing you at the footer). This
+// updates GSAP's remembered value so every refresh keeps it "manual"; we always
+// start at the top (see ScrollToTop).
+ScrollTrigger.clearScrollMemory('manual')
+
 export { gsap, ScrollTrigger, useGSAP }
