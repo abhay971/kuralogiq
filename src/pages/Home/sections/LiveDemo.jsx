@@ -50,7 +50,8 @@ export default function LiveDemo() {
     <section
       ref={root}
       className="pt-4 pb-12 md:pt-6 md:pb-16"
-      style={{ background: 'linear-gradient(180deg, #120a06 0%, #0c0805 100%)' }}
+      // Background now comes from the shared <BandBackdrop /> (see Home.jsx).
+      // Previous: style={{ background: 'linear-gradient(180deg, #120a06 0%, #0c0805 100%)' }}
     >
       <div className="container-px">
         <div className="relative overflow-hidden rounded-[24px] border-4 border-white/10 bg-grad-dark text-white">

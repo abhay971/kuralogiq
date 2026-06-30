@@ -62,23 +62,21 @@ export default function FrontDesk() {
   return (
     <section
       ref={root}
-      className="relative overflow-hidden bg-paper pt-20 pb-[46rem] md:pt-28 md:pb-[54rem] lg:pt-32"
+      className="relative overflow-hidden pt-20 pb-[46rem] md:pt-28 md:pb-[54rem] lg:pt-32"
     >
-      {/* Warm transition band — the gradient begins AFTER the content:
-          vivid yellow (with side-glows) → orange → dark, with a center line. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[46rem] md:h-[54rem]"
-        style={{
-          background: [
-            'radial-gradient(50% 26% at 0% 13%, rgba(255,227,98,0.95), transparent 66%)',
-            'radial-gradient(50% 26% at 100% 13%, rgba(255,227,98,0.95), transparent 66%)',
-            'linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFEDA2 5%, #FFE067 15%, #FFCE38 26%, #FFAD1A 41%, #FB8410 56%, #C24400 77%, #2a1000 100%)',
-          ].join(','),
-        }}
-      >
-        <span className="absolute left-1/2 top-[3%] h-[90%] w-[2px] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/0 via-white/55 to-white/30" />
-      </div>
+      {/* Warm transition band now comes from the shared <BandBackdrop /> behind
+          this section group (see Home.jsx). Previous per-section gradient:
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-[46rem] md:h-[54rem]"
+            style={{
+              background: [
+                'radial-gradient(50% 26% at 0% 13%, rgba(255,227,98,0.95), transparent 66%)',
+                'radial-gradient(50% 26% at 100% 13%, rgba(255,227,98,0.95), transparent 66%)',
+                'linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFEDA2 5%, #FFE067 15%, #FFCE38 26%, #FFAD1A 41%, #FB8410 56%, #C24400 77%, #2a1000 100%)',
+              ].join(','),
+            }}
+          /> */}
 
       <div className="relative z-10 container-px flex flex-col items-center gap-12 md:gap-16">
         <SectionHeading

@@ -43,15 +43,15 @@ export default function Security() {
     <section
       ref={root}
       className="py-14 text-white md:py-20"
-      style={{
-        background: [
-          // bright teal/cyan side-glows around the cards (left + right)
-          'radial-gradient(34% 44% at 0% 56%, rgba(0,235,185,0.6), transparent 60%)',
-          'radial-gradient(34% 44% at 100% 56%, rgba(0,235,185,0.6), transparent 60%)',
-          // deep green (top) → teal/cyan → light cyan → near-white (Figma ends #F2F7F9)
-          'linear-gradient(180deg, #0f3a26 0%, #0a5a40 16%, #0a8268 33%, #12a890 50%, #57cfc2 68%, #b7efe8 86%, #f2f7f9 100%)',
-        ].join(','),
-      }}
+      // Background now comes from the shared <BandBackdrop /> (see Home.jsx).
+      // Previous per-section gradient:
+      // style={{
+      //   background: [
+      //     'radial-gradient(34% 44% at 0% 56%, rgba(0,235,185,0.6), transparent 60%)',
+      //     'radial-gradient(34% 44% at 100% 56%, rgba(0,235,185,0.6), transparent 60%)',
+      //     'linear-gradient(180deg, #0f3a26 0%, #0a5a40 16%, #0a8268 33%, #12a890 50%, #57cfc2 68%, #b7efe8 86%, #f2f7f9 100%)',
+      //   ].join(','),
+      // }}
     >
       <div className="container-px">
         {/* Heading */}

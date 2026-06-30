@@ -37,10 +37,12 @@ export default function Patients() {
     <section
       ref={root}
       className="pt-14 pb-8 text-white md:pt-20 md:pb-10"
-      style={{
-        background:
-          'linear-gradient(180deg, #2a1000 0%, #1f0e06 26%, #190d07 55%, #140b07 100%)',
-      }}
+      // Background now comes from the shared <BandBackdrop /> (see Home.jsx).
+      // Previous per-section gradient:
+      // style={{
+      //   background:
+      //     'linear-gradient(180deg, #2a1000 0%, #1f0e06 26%, #190d07 55%, #140b07 100%)',
+      // }}
     >
       <div className="container-px">
         {/* Heading */}

@@ -38,12 +38,12 @@ export default function MultiLocation() {
     <section
       ref={root}
       className="overflow-hidden py-14 text-white md:py-20"
-      style={{
-        background:
-          // black at top → deep forest green at the bottom (ends on Security's
-          // top color so the two sections blend with no seam)
-          'linear-gradient(180deg, #0a0807 0%, #08130d 26%, #0a2516 52%, #0e3622 80%, #0f3a26 100%)',
-      }}
+      // Background now comes from the shared <BandBackdrop /> (see Home.jsx).
+      // Previous per-section gradient:
+      // style={{
+      //   background:
+      //     'linear-gradient(180deg, #0a0807 0%, #08130d 26%, #0a2516 52%, #0e3622 80%, #0f3a26 100%)',
+      // }}
     >
       <div className="container-px">
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">

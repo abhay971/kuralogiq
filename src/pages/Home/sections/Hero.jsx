@@ -2,17 +2,14 @@ import { useRef } from 'react'
 import { gsap, useGSAP } from '@/animations/gsap'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import Pulse from '@/components/ui/Pulse'
-import ShaderBackground from '@/components/ui/ShaderBackground'
-// --- Previous hero (gradient + 3D scroll dashboard) — kept for easy revert ---
-// import ScrollDashboard from '@/components/ui/ScrollDashboard'
-// import HealthcareDashboard from '@/components/ui/HealthcareDashboard'
+import ScrollDashboard from '@/components/ui/ScrollDashboard'
+import HealthcareDashboard from '@/components/ui/HealthcareDashboard'
 
 /**
- * Hero — "Your whole practice. One [pulse] platform." over an animated WebGL
- * shader background (fiery nebula). White serif headline + two pill CTAs.
- *
- * The previous sunrise-gradient + 3D dashboard hero is preserved (commented)
- * at the bottom of this file so we can switch back if we prefer that design.
+ * Hero — "Your whole practice. One [pulse] platform." on the Figma sunrise
+ * gradient (burnt-orange crown + bright yellow side-glows fading to the page
+ * background), white serif headline, two pill CTAs, and a 3D scroll-tilt
+ * dashboard.
  */
 export default function Hero() {
   const root = useRef(null)
@@ -29,25 +26,143 @@ export default function Hero() {
     { scope: root, dependencies: [reduceMotion] }
   )
 
+  // --- Previous gradient hero background (kept for easy restore) ---
+  // Apply by adding this back as the <section> style prop:
+  // style={{
+  //   background: [
+  //     'linear-gradient(180deg, rgba(245,245,245,0) 82%, #f5f5f5 97%)',
+  //     'radial-gradient(46% 38% at 0% 60%, rgba(255,221,64,0.92), rgba(255,221,64,0) 72%)',
+  //     'radial-gradient(46% 38% at 100% 60%, rgba(255,221,64,0.92), rgba(255,221,64,0) 72%)',
+  //     'linear-gradient(180deg, #481800 0%, #6e2600 9%, rgba(122,44,0,0) 36%)',
+  //     'radial-gradient(115% 80% at 50% 4%, #8a3000 0%, #c64400 13%, #ee6410 25%, #ff8800 36%, #ffa61c 46%, #ffc346 56%, #ffd96e 66%, #ffe9a0 76%, #fff6da 88%, #f5f5f5 100%)',
+  //   ].join(','),
+  // }}
   return (
     <section
       ref={root}
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-black"
+      className="relative overflow-x-clip"
     >
-      {/* Animated shader background (lazy GPU render, pauses offscreen) */}
-      <ShaderBackground reduceMotion={reduceMotion} />
-
-      {/* Soft vignette so the headline keeps contrast over the bright nebula */}
-      <div
+      {/* --- SVG background (Figma export), inlined so its filters/blend-modes
+          render reliably. cover via preserveAspectRatio="xMidYMin slice". --- */}
+      <svg
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[1]"
-        style={{
-          background:
-            'radial-gradient(120% 80% at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%)',
-        }}
-      />
+        className="pointer-events-none absolute inset-0 -z-0 h-full w-full"
+        width="1728"
+        height="1696"
+        viewBox="0 0 1728 1696"
+        fill="none"
+        preserveAspectRatio="xMidYMin slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g clipPath="url(#clip0_558_101)">
+          <rect width="1728" height="1696" fill="#F5F5F5" />
+          <g filter="url(#filter0_f_558_101)">
+            <path d="M-174 -158H1903V1231H-174V-158Z" fill="url(#paint0_radial_558_101)" />
+          </g>
+          <g filter="url(#filter1_f_558_101)" style={{ mixBlendMode: 'plus-lighter' }}>
+            <ellipse
+              cx="-28.4294"
+              cy="751.383"
+              rx="186.606"
+              ry="342.787"
+              transform="rotate(-12.1496 -28.4294 751.383)"
+              fill="white"
+            />
+          </g>
+          <g filter="url(#filter2_f_558_101)" style={{ mixBlendMode: 'plus-lighter' }}>
+            <ellipse
+              cx="186.606"
+              cy="342.787"
+              rx="186.606"
+              ry="342.787"
+              transform="matrix(-0.977602 -0.210464 -0.210464 0.977602 2011.14 455.548)"
+              fill="white"
+            />
+          </g>
+          <g filter="url(#filter3_f_558_101)" style={{ mixBlendMode: 'plus-lighter' }}>
+            <path d="M-237 1272H1903V1510H-237V1272Z" fill="white" />
+          </g>
+        </g>
+        <defs>
+          <filter
+            id="filter0_f_558_101"
+            x="-282"
+            y="-266"
+            width="2293"
+            height="1605"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+            <feGaussianBlur stdDeviation="54" result="effect1_foregroundBlur_558_101" />
+          </filter>
+          <filter
+            id="filter1_f_558_101"
+            x="-804.656"
+            y="-166.052"
+            width="1552.45"
+            height="1834.87"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+            <feGaussianBlur stdDeviation="290" result="effect1_foregroundBlur_558_101" />
+          </filter>
+          <filter
+            id="filter2_f_558_101"
+            x="980.344"
+            y="-166.052"
+            width="1552.45"
+            height="1834.87"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+            <feGaussianBlur stdDeviation="290" result="effect1_foregroundBlur_558_101" />
+          </filter>
+          <filter
+            id="filter3_f_558_101"
+            x="-745"
+            y="764"
+            width="3156"
+            height="1254"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+            <feGaussianBlur stdDeviation="254" result="effect1_foregroundBlur_558_101" />
+          </filter>
+          <radialGradient
+            id="paint0_radial_558_101"
+            cx="0"
+            cy="0"
+            r="1"
+            gradientUnits="userSpaceOnUse"
+            gradientTransform="translate(839.987 -158) rotate(90) scale(1265.77 3609.34)"
+          >
+            <stop stopColor="#822D00" />
+            <stop offset="0.232092" stopColor="#CF4800" />
+            <stop offset="0.443647" stopColor="#F77300" />
+            <stop offset="0.585349" stopColor="#FF9100" />
+            <stop offset="0.727051" stopColor="#FCCF3D" />
+            <stop offset="1" stopColor="#F2F7F9" />
+          </radialGradient>
+          <clipPath id="clip0_558_101">
+            <rect width="1728" height="1696" fill="white" />
+          </clipPath>
+        </defs>
+      </svg>
 
-      <div className="container-px relative z-10 flex flex-col items-center py-32 text-center">
+      {/* Fade the hero's bottom edge into the page background (#f5f5f5) across
+          the full width so the SVG's white glows don't create a seam with the
+          section below (matches the old gradient's bottom-fade behaviour). */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-48 bg-gradient-to-b from-transparent to-[#f5f5f5]" />
+
+      <div className="container-px relative z-10 flex flex-col items-center pt-32 text-center md:pt-40">
         <h1 className="font-display text-hero leading-[1.08] text-white">
           <span data-hero-line className="block overflow-hidden">
             <span className="block">Your whole practice.</span>
@@ -88,46 +203,12 @@ export default function Hero() {
             Try the Live Demo
           </a>
         </div>
-      </div>
-    </section>
-  )
-}
 
-/* ============================================================================
-   PREVIOUS HERO — sunrise gradient + 3D scroll-tilt dashboard.
-   Restore by swapping the <section> above for this and re-enabling the
-   ScrollDashboard / HealthcareDashboard imports at the top of the file.
-   ----------------------------------------------------------------------------
-
-  return (
-    <section
-      ref={root}
-      className="relative overflow-hidden"
-      style={{
-        background: [
-          // white fade at the very bottom so the hero's bottom edge is uniformly
-          // #ffffff across the full width — seamless with the white section below
-          // (no seam / bifurcation line).
-          'linear-gradient(180deg, rgba(255,255,255,0) 82%, #ffffff 97%)',
-          // bright yellow side-glows (Figma plus-lighter ellipses)
-          'radial-gradient(46% 38% at 0% 60%, rgba(255,221,64,0.92), rgba(255,221,64,0) 72%)',
-          'radial-gradient(46% 38% at 100% 60%, rgba(255,221,64,0.92), rgba(255,221,64,0) 72%)',
-          // dark burnt-orange crown across the top (uniform), fading out by ~36%
-          'linear-gradient(180deg, #481800 0%, #6e2600 9%, rgba(122,44,0,0) 36%)',
-          // radial "sun" dome → gives the semi-rounded gradient finish at the bottom
-          'radial-gradient(115% 80% at 50% 4%, #8a3000 0%, #c64400 13%, #ee6410 25%, #ff8800 36%, #ffa61c 46%, #ffc346 56%, #ffd96e 66%, #ffe9a0 76%, #fff6da 88%, #ffffff 100%)',
-        ].join(','),
-      }}
-    >
-      <div className="container-px flex flex-col items-center pt-32 text-center md:pt-40">
-        ... headline / subtitle / CTAs (same as above) ...
-
-        // 3D scroll-tilt dashboard
+        {/* 3D scroll-tilt dashboard */}
         <ScrollDashboard className="mt-8 w-full pb-16 md:mt-4 md:pb-24">
           <HealthcareDashboard />
         </ScrollDashboard>
       </div>
     </section>
   )
-
-   ========================================================================== */
+}

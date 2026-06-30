@@ -1,4 +1,5 @@
 import Hero from '@/pages/Home/sections/Hero'
+import BandBackdrop from '@/pages/Home/sections/BandBackdrop'
 import NoSalesCall from '@/pages/Home/sections/NoSalesCall'
 import Specialties from '@/pages/Home/sections/Specialties'
 import AiAssist from '@/pages/Home/sections/AiAssist'
@@ -24,11 +25,19 @@ export default function Home() {
       <AiAssist />
       <AiReviewable />
       <FinishNote />
-      <FrontDesk />
-      <Patients />
-      <LiveDemo />
-      <MultiLocation />
-      <Security />
+
+      {/* Shared Figma backdrop for the dark stretch (light → orange → black →
+          green → light). Stretched to the combined height of these 5 sections;
+          each section's own background is transparent so this shows through. */}
+      <div className="relative">
+        <BandBackdrop />
+        <FrontDesk />
+        <Patients />
+        <LiveDemo />
+        <MultiLocation />
+        <Security />
+      </div>
+
       <TakeTheDemo />
       <FinalCta />
     </>
