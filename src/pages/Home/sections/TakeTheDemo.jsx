@@ -57,11 +57,11 @@ export default function TakeTheDemo() {
     <section
       id="pricing"
       ref={root}
-      className="bg-paper pt-14 pb-8 md:pt-20 md:pb-10"
+      className="bg-paper pt-10 pb-6 md:pt-14 md:pb-8"
     >
       <div className="container-px">
         <div
-          className="overflow-hidden rounded-[28px] border-4 border-white p-6 shadow-[0_18px_48px_rgba(0,0,0,0.08)] sm:p-10 md:border-8 lg:p-14"
+          className="overflow-hidden rounded-[28px] border-4 border-white p-5 shadow-[0_18px_48px_rgba(0,0,0,0.08)] sm:p-8 md:border-8 lg:p-10"
           style={{
             backgroundImage:
               'linear-gradient(190deg, #d7d7d7 28%, #ffffff 63%)',

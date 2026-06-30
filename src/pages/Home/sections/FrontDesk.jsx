@@ -62,7 +62,7 @@ export default function FrontDesk() {
   return (
     <section
       ref={root}
-      className="relative overflow-hidden pt-20 pb-[46rem] md:pt-28 md:pb-[54rem] lg:pt-32"
+      className="relative overflow-hidden pt-16 pb-[32rem] md:pt-20 md:pb-[38rem] lg:pt-24"
     >
       {/* Warm transition band now comes from the shared <BandBackdrop /> behind
           this section group (see Home.jsx). Previous per-section gradient:

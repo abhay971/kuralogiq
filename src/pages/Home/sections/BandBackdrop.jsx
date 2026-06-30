@@ -5,22 +5,27 @@
  * reliably (CSS background-image rasterization drops them). Stretched with
  * preserveAspectRatio="none" so its three colour zones scale to the actual
  * combined height of the sections it sits behind.
+ *
+ * TOP_PAD adds empty (#f5f5f5 page-bg) space ABOVE the artwork inside the
+ * viewBox, which pushes the whole colour band DOWN while keeping the light
+ * bottom anchored at the section's end. This avoids the seam lines that a
+ * translate-y would cause (it never exposes the SVG's top/bottom edges).
+ * Increase TOP_PAD to move the band further down, decrease to move it up.
  */
+const ART_H = 5692
+const TOP_PAD = 900
+
 export default function BandBackdrop() {
   return (
     <svg
       aria-hidden="true"
-      // translate-y shifts the whole band down so the orange sunrise starts
-      // lower into FrontDesk (top falls back to the light page bg; bottom is
-      // also light, so it extends harmlessly downward). Tweak the rem value to
-      // move it more / less.
-      className="pointer-events-none absolute inset-0 -z-10 h-full w-full translate-y-32"
-      viewBox="0 0 1728 5692"
+      className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+      viewBox={`0 0 1728 ${ART_H + TOP_PAD}`}
       fill="none"
       preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clipPath="url(#clip0_558_109)">
+      <g clipPath="url(#clip0_558_109)" transform={`translate(0 ${TOP_PAD})`}>
         <rect width="1728" height="5692" fill="#F5F5F5" />
         <rect x="-19" y="3028" width="1745" height="1500" fill="#010101" />
         <g filter="url(#filter0_f_558_109)">
@@ -49,9 +54,13 @@ export default function BandBackdrop() {
             fill="white"
           />
         </g>
+        {/* Top white glow band removed: with the backdrop translated down its
+            top edge is exposed mid-page, and this band made that edge brighter
+            than the #f5f5f5 page bg → visible seam line. Base rect (#F5F5F5)
+            now meets the page bg seamlessly.
         <g filter="url(#filter4_f_558_109)" style={{ mixBlendMode: 'plus-lighter' }}>
           <path d="M-231 238H1909V0H-231V238Z" fill="white" />
-        </g>
+        </g> */}
         <g filter="url(#filter5_f_558_109)">
           <path d="M-168 4212H1909V5601H-168V4212Z" fill="url(#paint1_radial_558_109)" />
         </g>
@@ -75,9 +84,13 @@ export default function BandBackdrop() {
             fill="white"
           />
         </g>
+        {/* Bottom white glow band removed: it brightened the backdrop's bottom
+            edge past the #f5f5f5 page bg, creating a seam with the next section
+            (TakeTheDemo, which is bg-paper #f5f5f5). Base rect (#F5F5F5) now
+            meets it seamlessly.
         <g filter="url(#filter8_f_558_109)" style={{ mixBlendMode: 'plus-lighter' }}>
           <path d="M-231 5454H1909V5692H-231V5454Z" fill="white" />
-        </g>
+        </g> */}
         <g filter="url(#filter9_f_558_109)">
           <ellipse cx="925" cy="1667.5" rx="458" ry="439.5" fill="url(#paint2_linear_558_109)" />
         </g>
@@ -120,8 +133,25 @@ export default function BandBackdrop() {
             fill="url(#paint8_linear_558_109)"
           />
         </g>
+        {/* Bottom fade: the white side-glows (filter6/7) brighten Security's
+            bottom to full white right up to the section edge, which doesn't
+            match the #f5f5f5 page → seam. Drawn last, this forces the band's
+            bottom slice to resolve to #f5f5f5 (sits BEHIND the cards, so only
+            the empty area below them is affected). */}
+        <rect x="-200" y="5150" width="2200" height="542" fill="url(#paintBottomFade_558_109)" />
       </g>
       <defs>
+        <linearGradient
+          id="paintBottomFade_558_109"
+          x1="0"
+          y1="5150"
+          x2="0"
+          y2="5650"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#F5F5F5" stopOpacity="0" />
+          <stop offset="1" stopColor="#F5F5F5" />
+        </linearGradient>
         <filter
           id="filter0_f_558_109"
           x="-389"
@@ -343,7 +373,9 @@ export default function BandBackdrop() {
           <stop offset="0.443647" stopColor="#F77300" />
           <stop offset="0.585349" stopColor="#FF9100" />
           <stop offset="0.727051" stopColor="#FCCF3D" />
-          <stop offset="1" stopColor="#F2F7F9" />
+          {/* Final stop snapped from Figma's #F2F7F9 to the page bg #F5F5F5 so
+              the band's light end matches the page exactly (no bluish seam). */}
+          <stop offset="1" stopColor="#F5F5F5" />
         </radialGradient>
         <radialGradient
           id="paint1_radial_558_109"
@@ -358,7 +390,9 @@ export default function BandBackdrop() {
           <stop offset="0.443647" stopColor="#00F798" />
           <stop offset="0.585349" stopColor="#00FFA6" />
           <stop offset="0.727051" stopColor="#3DFCC6" />
-          <stop offset="1" stopColor="#F2F7F9" />
+          {/* Final stop snapped from Figma's #F2F7F9 to the page bg #F5F5F5 so
+              the cyan finish matches the next section exactly (no bluish seam). */}
+          <stop offset="1" stopColor="#F5F5F5" />
         </radialGradient>
         <linearGradient
           id="paint2_linear_558_109"

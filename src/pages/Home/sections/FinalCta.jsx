@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { gsap, useGSAP } from '@/animations/gsap'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import FinalCtaBackdrop from '@/pages/Home/sections/FinalCtaBackdrop'
 
 /**
  * FinalCta — closing call-to-action band (Figma #13). The Figma dome gradient,
@@ -31,17 +32,16 @@ export default function FinalCta() {
   return (
     <section
       ref={root}
-      className="overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24"
-      style={{
-        background:
-          // exact sampled dome. Geometry tuned so the TOP edge is uniformly pure
-          // white (seamless with the white card above) and the BOTTOM edge is
-          // uniformly deep navy #011138 (seamless with the footer below) — no
-          // colour mismatch at either boundary, so no visible seam/bifurcation.
-          'radial-gradient(150% 105% at 50% 100%, #011138 0%, #011138 34%, #012571 43%, #01329c 49%, #013ec2 54%, #014be9 59%, #0467fd 64%, #0d8fff 70%, #35beff 76%, #67edff 81%, #a9ffff 86%, #e6ffff 90%, #ffffff 93%, #ffffff 100%)',
-      }}
+      className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24"
+      // Background now comes from the inlined Figma <FinalCtaBackdrop />.
+      // Previous hand-built CSS dome (kept for easy restore):
+      // style={{
+      //   background:
+      //     'radial-gradient(150% 105% at 50% 100%, #011138 0%, #011138 34%, #012571 43%, #01329c 49%, #013ec2 54%, #014be9 59%, #0467fd 64%, #0d8fff 70%, #35beff 76%, #67edff 81%, #a9ffff 86%, #e6ffff 90%, #ffffff 93%, #ffffff 100%)',
+      // }}
     >
-      <div className="container-px relative flex flex-col items-center text-center">
+      <FinalCtaBackdrop />
+      <div className="container-px relative z-10 flex flex-col items-center text-center">
         <h2
           data-reveal
           className="max-w-4xl font-display text-h2 leading-[1.08] text-white text-balance md:text-hero md:leading-[1.05]"

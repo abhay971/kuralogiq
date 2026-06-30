@@ -1,5 +1,5 @@
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+// import Footer from '@/components/layout/Footer'
 
 /**
  * App shell shared across every route: header, page content, footer.
@@ -14,7 +14,7 @@ export default function Layout({ children }) {
       <main id="main" className="relative min-h-screen">
         {children}
       </main>
-      <Footer />
+      {/* <Footer /> temporarily removed while adjusting the FinalCta gradient */}
     </div>
   )
 }
