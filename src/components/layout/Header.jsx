@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { HEADER_LINKS } from '@/constants/site'
 import { cn } from '@/lib/utils'
 import Logo from '@/components/ui/Logo'
@@ -26,15 +27,25 @@ export default function Header() {
 
           {/* Desktop links */}
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-            {HEADER_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="font-display text-base text-ink transition-opacity hover:opacity-60"
-              >
-                {link.label}
-              </a>
-            ))}
+            {HEADER_LINKS.map((link) =>
+              link.to ? (
+                <Link
+                  key={link.label}
+                  to={link.to}
+                  className="font-display text-base text-ink transition-opacity hover:opacity-60"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="font-display text-base text-ink transition-opacity hover:opacity-60"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </nav>
 
           {/* Desktop actions */}
@@ -80,16 +91,27 @@ export default function Header() {
           open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         )}
       >
-        {HEADER_LINKS.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            onClick={() => setOpen(false)}
-            className="font-display text-4xl text-ink"
-          >
-            {link.label}
-          </a>
-        ))}
+        {HEADER_LINKS.map((link) =>
+          link.to ? (
+            <Link
+              key={link.label}
+              to={link.to}
+              onClick={() => setOpen(false)}
+              className="font-display text-4xl text-ink"
+            >
+              {link.label}
+            </Link>
+          ) : (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="font-display text-4xl text-ink"
+            >
+              {link.label}
+            </a>
+          )
+        )}
         <div className="mt-8 flex flex-col gap-3">
           <Button variant="outline" href="#signin" onClick={() => setOpen(false)}>
             Sign In

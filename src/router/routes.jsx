@@ -5,6 +5,7 @@ import { lazy } from 'react'
  * the homepage never pays for the Work/About/Contact code up front.
  */
 const Home = lazy(() => import('@/pages/Home/Home.jsx'))
+const Ai = lazy(() => import('@/pages/Ai/Ai.jsx'))
 const Work = lazy(() => import('@/pages/Work/Work.jsx'))
 const About = lazy(() => import('@/pages/About/About.jsx'))
 const Contact = lazy(() => import('@/pages/Contact/Contact.jsx'))
@@ -12,6 +13,7 @@ const NotFound = lazy(() => import('@/pages/NotFound/NotFound.jsx'))
 
 export const routes = [
   { path: '/', element: <Home />, label: 'Home' },
+  { path: '/ai', element: <Ai />, label: 'AI' },
   { path: '/work', element: <Work />, label: 'Work' },
   { path: '/about', element: <About />, label: 'About' },
   { path: '/contact', element: <Contact />, label: 'Contact' },

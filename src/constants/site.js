@@ -13,9 +13,10 @@ export const NAV_LINKS = [
   { label: 'Contact', path: '/contact' },
 ]
 
-// Marketing header links (anchor to homepage sections).
+// Marketing header links. "AI" is a dedicated route; the rest anchor to
+// homepage sections.
 export const HEADER_LINKS = [
-  { label: 'AI', href: '#ai' },
+  { label: 'AI', to: '/ai' },
   { label: 'Features', href: '#features' },
   { label: 'Specialties', href: '#specialties' },
   { label: 'Pricing', href: '#pricing' },
