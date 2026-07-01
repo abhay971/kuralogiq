@@ -63,13 +63,13 @@ export default function FinalCta() {
         >
           <a
             href="#demo"
-            className="inline-flex h-14 items-center justify-center rounded-full bg-grad-dark px-9 font-display text-lg whitespace-nowrap text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5"
+            className="inline-flex h-16 items-center justify-center rounded-full bg-grad-dark px-10 font-display text-xl whitespace-nowrap text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5"
           >
             Book a Demo
           </a>
           <a
             href="#demo"
-            className="inline-flex h-14 items-center justify-center rounded-full bg-white px-9 font-display text-lg whitespace-nowrap text-ink shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5"
+            className="inline-flex h-16 items-center justify-center rounded-full bg-white px-10 font-display text-xl whitespace-nowrap text-ink shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5"
           >
             Try the Live Demo
           </a>

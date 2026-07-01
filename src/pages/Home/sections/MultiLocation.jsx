@@ -50,7 +50,7 @@ export default function MultiLocation() {
           {/* Visual */}
           <div
             data-reveal
-            className="will-animate aspect-[16/10] w-full rounded-[24px] border-4 border-white/15 bg-gradient-to-b from-white to-[#eef1ef] shadow-[0_24px_60px_rgba(0,0,0,0.18)]"
+            className="will-animate aspect-[4/3] w-full rounded-[24px] border border-white/10 bg-gradient-to-b from-white to-[#eef1ef] shadow-[0_24px_60px_rgba(0,0,0,0.18)] lg:aspect-square"
           />
 
           {/* Copy */}
@@ -71,7 +71,7 @@ export default function MultiLocation() {
             </p>
             <a
               href="#charting"
-              className="mt-2 rounded-full border-4 border-white/20 bg-gradient-to-b from-white to-[#f1f2f5] px-6 py-4 font-sans text-lg font-bold text-black transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5"
+              className="mt-2 rounded-full border border-white/20 bg-gradient-to-b from-white to-[#f1f2f5] px-6 py-4 font-display text-lg font-bold text-black transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5"
             >
               Explore Charting
             </a>

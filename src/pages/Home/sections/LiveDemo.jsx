@@ -57,7 +57,7 @@ export default function LiveDemo() {
         <div className="relative overflow-hidden rounded-[24px] border-4 border-white/10 bg-grad-dark text-white">
           <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="white" />
 
-          <div className="relative grid grid-cols-1 items-center gap-4 p-6 md:grid-cols-2 md:p-10">
+          <div className="relative grid grid-cols-1 items-center gap-4 p-6 md:grid-cols-2 md:p-12 lg:p-14">
             {/* Text + CTAs */}
             <div className="relative z-10 flex flex-col items-start">
               <h2

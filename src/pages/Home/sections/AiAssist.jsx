@@ -19,10 +19,11 @@ const CARDS = [
 
 const N = CARDS.length
 
-// Where a card sits given its depth in the stack (0 = front).
+// Where a card sits given its depth in the stack (0 = front). Offsets are kept
+// tight so only a single softer card peeks out below the front card.
 const place = (slot) => ({
-  y: slot * 16,
-  scale: 1 - slot * 0.05,
+  y: slot * 9,
+  scale: 1 - slot * 0.03,
   zIndex: N - slot,
 })
 const slotOf = (card, front) => (card - front + N) % N
@@ -119,15 +120,15 @@ export default function AiAssist() {
         </div>
 
         {/* Right — card deck */}
-        <div data-reveal className="will-animate relative mx-auto w-full max-w-[560px]">
-          <div className="relative h-[230px] sm:h-[250px]">
+        <div data-reveal className="will-animate relative mx-auto w-full max-w-[620px]">
+          <div className="relative h-[250px] sm:h-[290px]">
             {CARDS.map((card) => (
               <div
                 key={card.title}
                 data-card
-                className="bg-grad-orange absolute inset-x-0 top-4 flex h-[150px] items-center gap-5 rounded-[18px] p-6 text-white shadow-[0_18px_40px_rgba(244,117,73,0.30)] sm:h-[168px] sm:gap-6 sm:p-8"
+                className="bg-grad-orange absolute inset-x-0 top-4 flex min-h-[168px] items-center gap-5 rounded-[18px] p-6 text-white shadow-[0_18px_40px_rgba(244,117,73,0.30)] sm:min-h-[200px] sm:gap-6 sm:p-8"
               >
-                <div className="size-16 shrink-0 rounded-[10px] border-4 border-white/20 bg-gradient-to-b from-[#fefeff] to-[#f1f2f5] sm:size-[84px]" />
+                <div className="size-16 shrink-0 rounded-[10px] bg-gradient-to-b from-[#fefeff] to-[#f1f2f5] sm:size-[84px]" />
                 <div className="flex min-w-0 flex-col gap-1">
                   <p className="font-sans text-xl font-bold leading-tight text-balance sm:text-2xl">
                     {card.title}

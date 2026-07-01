@@ -188,17 +188,17 @@ export default function Hero() {
 
         <div
           data-hero-cta
-          className="relative z-10 mt-9 flex w-full max-w-xl flex-col gap-3 sm:flex-row sm:justify-center"
+          className="relative z-10 mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:justify-center"
         >
           <a
             href="#demo"
-            className="flex-1 rounded-[2.25rem] border-4 border-white/20 bg-grad-dark px-8 py-5 font-display text-xl text-white transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 sm:text-2xl"
+            className="inline-flex items-center justify-center rounded-full bg-grad-dark px-9 py-4 font-display text-lg text-white shadow-[0_10px_30px_rgba(0,0,0,0.22)] transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 sm:text-xl"
           >
             Book a Demo
           </a>
           <a
             href="#demo"
-            className="flex-1 rounded-[2.25rem] border-4 border-white/20 bg-gradient-to-b from-white to-[#f1f2f5] px-8 py-5 font-display text-xl text-ink transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 sm:text-2xl"
+            className="inline-flex items-center justify-center rounded-full border border-black/5 bg-gradient-to-b from-white to-[#f1f2f5] px-9 py-4 font-display text-lg text-ink shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 sm:text-xl"
           >
             Try the Live Demo
           </a>

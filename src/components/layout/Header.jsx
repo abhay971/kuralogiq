@@ -21,7 +21,7 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 pt-4">
       <div className="container-px">
-        <div className="flex items-center justify-between gap-4 rounded-full border border-white/40 bg-white/20 p-3 backdrop-blur-xl md:p-4">
+        <div className="flex items-center justify-between gap-4 rounded-full border border-white/40 bg-white/20 p-2 pl-3 backdrop-blur-xl md:p-2.5 md:pl-4">
           <Logo />
 
           {/* Desktop links */}

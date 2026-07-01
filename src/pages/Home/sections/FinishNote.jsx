@@ -59,7 +59,7 @@ export default function FinishNote() {
         <div className="grid items-center gap-10 md:gap-16 lg:grid-cols-2">
           <div
             data-reveal
-            className="will-animate flex items-center justify-center rounded-[24px] border-4 border-line bg-white p-8 shadow-[0_16px_36px_rgba(0,0,0,0.02)]"
+            className="will-animate flex items-center justify-center rounded-[24px] border border-line/40 bg-white p-6 shadow-[0_16px_36px_rgba(0,0,0,0.02)]"
           >
             <img
               src={folder}
@@ -68,7 +68,7 @@ export default function FinishNote() {
               height={387}
               loading="lazy"
               decoding="async"
-              className="w-full max-w-sm"
+              className="w-full max-w-md"
             />
           </div>
 
@@ -90,7 +90,7 @@ export default function FinishNote() {
                 on Button conflicts with its CSS opacity transition and the GSAP
                 tween leaves it stuck at opacity 0. */}
             <div data-reveal className="mt-2">
-              <Button href="#ai" variant="dark" className="border-4 border-white/20">
+              <Button href="#ai" variant="dark">
                 Explore Charting
               </Button>
             </div>

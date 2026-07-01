@@ -22,23 +22,15 @@ const BADGES = [
     circle: 'bg-[#ffc801]',
     iconSize: 'size-[18px]',
     side: 'left',
-    float: 'left-0 top-[14%] -rotate-3',
+    float: 'left-[6%] top-[14%] rotate-6', // top-left, leans in
   },
   {
     icon: platformIcon,
     label: 'One Connected Platform',
     circle: null, // the icon is its own 40px badge
     iconSize: 'size-10',
-    side: 'right',
-    float: 'right-0 top-[20%] rotate-3',
-  },
-  {
-    icon: specialtiesIcon,
-    label: 'Built for 4 Specialties',
-    circle: 'bg-[#d66519]',
-    iconSize: 'size-5',
     side: 'left',
-    float: 'left-[3%] bottom-[16%] rotate-3',
+    float: 'left-[6%] bottom-[16%] -rotate-6', // bottom-left, leans in
   },
   {
     icon: locationIcon,
@@ -46,7 +38,15 @@ const BADGES = [
     circle: 'bg-[#329a79]',
     iconSize: 'size-5',
     side: 'right',
-    float: 'right-[3%] bottom-[12%] -rotate-3',
+    float: 'right-[6%] top-[20%] -rotate-6', // top-right, leans in
+  },
+  {
+    icon: specialtiesIcon,
+    label: 'Built for 4 Specialties',
+    circle: 'bg-[#d66519]',
+    iconSize: 'size-5',
+    side: 'right',
+    float: 'right-[6%] bottom-[12%] rotate-6', // bottom-right, leans in
   },
 ]
 
@@ -167,22 +167,29 @@ export default function NoSalesCall() {
           />
         ))}
 
-        <div className="mx-auto flex max-w-3xl flex-col items-center py-6 text-center lg:py-16">
+        <div className="mx-auto flex max-w-4xl flex-col items-center py-6 text-center lg:py-16">
           <h2
             data-reveal
             className="font-display text-h2 leading-[1.08] text-ink text-balance"
           >
-            No sales call required. Explore the platform at your own pace.
+            No sales call required.
+            <br />
+            Explore the platform at your own pace.
           </h2>
 
-          <div data-reveal className="mt-8">
+          <div
+            data-reveal
+            className="mt-8 flex w-full max-w-md items-center justify-center gap-4"
+          >
+            <span className="hidden h-px flex-1 bg-ink/15 sm:block" />
             <Button
               href="#demo"
               variant="dark"
-              className="border-4 border-white/20 px-8 py-3 text-base"
+              className="px-8 py-3 text-base"
             >
               Book Now
             </Button>
+            <span className="hidden h-px flex-1 bg-ink/15 sm:block" />
           </div>
 
           {/* Badges grid — mobile / tablet */}

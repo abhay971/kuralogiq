@@ -44,7 +44,7 @@ export default function Logo({ className, bare = false, to = '/' }) {
         alt="Kuralogiq"
         width={764}
         height={192}
-        className="h-14 w-auto rounded-full md:h-16"
+        className="h-11 w-auto rounded-full md:h-12"
       />
     </Link>
   )

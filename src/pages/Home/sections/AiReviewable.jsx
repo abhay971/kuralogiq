@@ -72,9 +72,9 @@ export default function AiReviewable() {
             ))}
           </h2>
 
-          <div data-reveal className="mt-6 flex items-center justify-center gap-4">
+          <div data-reveal className="mt-8 flex items-center justify-center gap-4">
             <span aria-hidden="true" className="hidden h-px w-24 bg-ink/15 sm:block" />
-            <Button href="#ai" variant="dark" className="border-4 border-white/20">
+            <Button href="#ai" variant="dark">
               Explore AI Capabilities
             </Button>
             <span aria-hidden="true" className="hidden h-px w-24 bg-ink/15 sm:block" />

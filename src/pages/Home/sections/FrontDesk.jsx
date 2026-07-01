@@ -106,8 +106,8 @@ export default function FrontDesk() {
                   aria-hidden={!center}
                   className="absolute inset-0 overflow-hidden rounded-[24px] border-4 bg-white will-change-transform"
                   style={{
-                    transform: `translateX(${off * 44}%) scale(${center ? 1 : 0.86})`,
-                    opacity: abs <= 1 ? 1 : 0,
+                    transform: `translateX(${off * 52}%) scale(${center ? 1 : 0.8})`,
+                    opacity: center ? 1 : abs === 1 ? 0.55 : 0,
                     zIndex: 30 - abs * 10,
                     borderColor: center ? 'rgba(255,255,255,0.25)' : 'var(--color-line)',
                     boxShadow: center
@@ -175,7 +175,7 @@ export default function FrontDesk() {
 
         <div data-reveal className="flex items-center justify-center gap-4">
           <span aria-hidden="true" className="hidden h-px w-24 bg-ink/15 sm:block" />
-          <Button href="#ai" variant="dark" className="border-4 border-white/20">
+          <Button href="#ai" variant="dark">
             Explore Scheduling
           </Button>
           <span aria-hidden="true" className="hidden h-px w-24 bg-ink/15 sm:block" />

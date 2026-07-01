@@ -87,7 +87,7 @@ export default function Specialties() {
             <article
               key={card.name}
               data-reveal
-              className="will-animate flex h-full flex-col rounded-[24px] border-4 border-line bg-white p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.02)]"
+              className="will-animate flex h-full flex-col rounded-[24px] border border-line bg-white p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.06)]"
             >
               <div
                 className="relative flex aspect-[5/4] items-center justify-center overflow-hidden rounded-[18px]"

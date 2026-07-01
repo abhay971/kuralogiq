@@ -8,14 +8,28 @@ import demoDashboard from '@/assets/images/demo-dashboard.jpg'
  * a benefit checklist + dual CTAs on the left and a fully-populated product
  * dashboard screenshot on the right (stacks to a single column on mobile).
  */
+// `icon` is the glyph colour: dark ink on the light (orange/yellow/teal)
+// circles for contrast, white only on the dark circle.
 const BENEFITS = [
-  { label: 'Build a SOAP note in under a minute', grad: 'bg-grad-orange' },
-  { label: 'Schedule a full day of appointments', grad: 'bg-grad-yellow' },
-  { label: 'Explore AI-assisted documentation', grad: 'bg-grad-dark' },
-  { label: 'Run an AR aging report', grad: 'bg-grad-teal' },
+  {
+    label: 'Build a SOAP note in under a minute',
+    grad: 'bg-grad-orange',
+    icon: '#1a1a1a',
+  },
+  {
+    label: 'Schedule a full day of appointments',
+    grad: 'bg-grad-yellow',
+    icon: '#1a1a1a',
+  },
+  {
+    label: 'Explore AI-assisted documentation',
+    grad: 'bg-grad-dark',
+    icon: '#ffffff',
+  },
+  { label: 'Run an AR aging report', grad: 'bg-grad-teal', icon: '#1a1a1a' },
 ]
 
-function Check() {
+function Check({ color = '#ffffff' }) {
   return (
     <svg
       viewBox="0 0 18 18"
@@ -25,7 +39,7 @@ function Check() {
     >
       <path
         d="M3.75 9.5 7.25 13l7-8"
-        stroke="white"
+        stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -96,7 +110,7 @@ export default function TakeTheDemo() {
                     <span
                       className={`flex size-10 shrink-0 items-center justify-center rounded-full ${item.grad}`}
                     >
-                      <Check />
+                      <Check color={item.icon} />
                     </span>
                     <span className="text-fluid-sm font-medium tracking-[-0.02em] text-ink">
                       {item.label}
@@ -130,7 +144,7 @@ export default function TakeTheDemo() {
                 height={1138}
                 loading="lazy"
                 decoding="async"
-                className="w-full rounded-tl-[24px] rounded-br-[24px] shadow-[0_24px_60px_rgba(0,0,0,0.18)]"
+                className="w-full rounded-[24px] object-cover shadow-[0_24px_60px_rgba(0,0,0,0.18)]"
               />
             </div>
           </div>

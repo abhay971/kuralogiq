@@ -80,12 +80,12 @@ export default function Patients() {
                 style={{
                   background: [
                     'radial-gradient(85% 70% at 93% -8%, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.12) 30%, rgba(255,255,255,0) 60%)',
-                    'linear-gradient(128deg, transparent 44%, rgba(255,255,255,0.10) 56%, rgba(255,255,255,0.03) 64%, transparent 74%)',
+                    'linear-gradient(128deg, transparent 44%, rgba(255,255,255,0.04) 56%, rgba(255,255,255,0.01) 64%, transparent 74%)',
                   ].join(','),
                 }}
               />
               <div className="relative">
-                <h3 className="font-sans text-2xl font-bold leading-[1.1] md:text-[1.75rem]">
+                <h3 className="font-sans text-[1.75rem] font-bold leading-[1.1] md:text-3xl">
                   {card.title}
                 </h3>
                 <p className="mt-2.5 text-base font-light text-white/65 text-pretty">{card.desc}</p>

@@ -5,7 +5,15 @@ import { useEffect, useState } from 'react'
  * Use it to skip/shorten animations — accessibility + perf on low-end devices.
  */
 export function useReducedMotion() {
-  const [reduced, setReduced] = useState(false)
+  // Read synchronously on init so the very first render already knows the
+  // preference — otherwise a false→true flip re-runs GSAP after `from` has set
+  // opacity:0, and the revert can leave content stuck hidden.
+  const [reduced, setReduced] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')

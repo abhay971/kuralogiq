@@ -81,18 +81,18 @@ export default function Security() {
                 i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'
               }`}
             >
-              <div className="flex h-40 w-full items-center justify-center rounded-[16px] bg-grad-dark md:h-44">
+              <div className="flex h-48 w-full items-center justify-center rounded-[16px] bg-grad-dark md:h-56">
                 <img
                   src={card.icon}
                   alt=""
-                  width={64}
-                  height={67}
+                  width={80}
+                  height={84}
                   loading="lazy"
                   decoding="async"
-                  className="h-auto w-14"
+                  className="h-auto w-16 md:w-20"
                 />
               </div>
-              <h3 className="pb-2 font-display text-2xl leading-[1.15] text-center text-white text-balance">
+              <h3 className="pb-2 font-display text-3xl leading-[1.15] text-center text-white text-balance">
                 {card.title}
               </h3>
             </div>
