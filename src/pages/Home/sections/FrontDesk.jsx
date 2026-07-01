@@ -181,10 +181,12 @@ export default function FrontDesk() {
           <span aria-hidden="true" className="hidden h-px w-24 bg-ink/15 sm:block" />
         </div>
 
-        {/* Vertical guide line descending through the warm transition band (Figma) */}
+        {/* Vertical guide line descending through the warm transition band (Figma).
+            Strongest in the mid-band (visible over the orange); fades at the
+            near-white top and the dark bottom. */}
         <div
           aria-hidden="true"
-          className="-mt-6 h-[26rem] w-px bg-gradient-to-b from-white/55 to-transparent md:h-[32rem]"
+          className="-mt-6 h-[28rem] w-[2px] bg-gradient-to-b from-white/40 via-white/95 to-transparent md:h-[34rem]"
         />
       </div>
     </section>
