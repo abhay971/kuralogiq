@@ -59,7 +59,7 @@ export default function FinishNote() {
         <div className="grid items-center gap-10 md:gap-16 lg:grid-cols-2">
           <div
             data-reveal
-            className="will-animate relative flex aspect-[4/3] items-end justify-end overflow-hidden rounded-[24px] border border-line/40 bg-white shadow-[0_16px_36px_rgba(0,0,0,0.02)]"
+            className="will-animate relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[24px] border border-line/40 bg-white shadow-[0_16px_36px_rgba(0,0,0,0.02)]"
           >
             <img
               src={folder}
@@ -68,7 +68,7 @@ export default function FinishNote() {
               height={387}
               loading="lazy"
               decoding="async"
-              className="w-[72%] max-w-none translate-x-[8%] translate-y-[8%]"
+              className="w-[112%] max-w-none translate-x-[3%] translate-y-[2%]"
             />
           </div>
 
