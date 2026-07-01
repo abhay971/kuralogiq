@@ -55,9 +55,9 @@ export default function FinalCtaBackdrop() {
       <defs>
         <filter
           id="filter0_f_558_139"
-          x="-804.656"
+          x="-900"
           y="-458.817"
-          width="1552.45"
+          width="2150"
           height="1834.87"
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
@@ -68,9 +68,9 @@ export default function FinalCtaBackdrop() {
         </filter>
         <filter
           id="filter1_f_558_139"
-          x="980.344"
+          x="478"
           y="-458.817"
-          width="1552.45"
+          width="2054"
           height="1834.87"
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
