@@ -48,8 +48,8 @@ export default function FinalCta() {
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background: [
-            'radial-gradient(46% 52% at 4% 20%, rgba(255,255,255,0.5), rgba(255,255,255,0) 70%)',
-            'radial-gradient(46% 52% at 96% 20%, rgba(255,255,255,0.5), rgba(255,255,255,0) 70%)',
+            'radial-gradient(72% 55% at 0% 16%, rgba(255,255,255,0.42), rgba(255,255,255,0) 80%)',
+            'radial-gradient(72% 55% at 100% 16%, rgba(255,255,255,0.42), rgba(255,255,255,0) 80%)',
           ].join(','),
         }}
       />

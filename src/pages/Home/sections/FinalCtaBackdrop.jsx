@@ -92,15 +92,15 @@ export default function FinalCtaBackdrop() {
           id="paint0_linear_558_139"
           x1="868.5"
           y1="0"
-          x2="869.132"
+          x2="868.5"
           y2="1161"
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#001138" />
-          <stop offset="0.232092" stopColor="#002D8B" />
-          <stop offset="0.443647" stopColor="#004FF7" />
-          <stop offset="0.585349" stopColor="#008BFF" />
-          <stop offset="0.727051" stopColor="#3DC3FC" />
+          <stop offset="0.24" stopColor="#002D8B" />
+          <stop offset="0.47" stopColor="#004FF7" />
+          <stop offset="0.66" stopColor="#008BFF" />
+          <stop offset="0.83" stopColor="#3DC3FC" />
           <stop offset="1" stopColor="#F2F7F9" />
         </linearGradient>
         <clipPath id="clip0_558_139">
