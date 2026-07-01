@@ -180,6 +180,12 @@ export default function FrontDesk() {
           </Button>
           <span aria-hidden="true" className="hidden h-px w-24 bg-ink/15 sm:block" />
         </div>
+
+        {/* Vertical guide line descending through the warm transition band (Figma) */}
+        <div
+          aria-hidden="true"
+          className="-mt-6 h-[26rem] w-px bg-gradient-to-b from-white/55 to-transparent md:h-[32rem]"
+        />
       </div>
     </section>
   )

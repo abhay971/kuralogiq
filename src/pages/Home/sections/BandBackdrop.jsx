@@ -27,7 +27,11 @@ export default function BandBackdrop() {
     >
       <g clipPath="url(#clip0_558_109)" transform={`translate(0 ${TOP_PAD})`}>
         <rect width="1728" height="5692" fill="#F5F5F5" />
-        <rect x="-19" y="3028" width="1745" height="1500" fill="#010101" />
+        {/* Solid black middle — widened past the viewBox sides and blurred so its
+            top/bottom edges feather instead of forming a hard horizontal seam. */}
+        <g filter="url(#filterBlackMid_558_109)">
+          <rect x="-320" y="3028" width="2360" height="1500" fill="#010101" />
+        </g>
         <g filter="url(#filter0_f_558_109)">
           <rect x="-169" y="2107" width="2064" height="1081" fill="black" />
         </g>
@@ -141,6 +145,17 @@ export default function BandBackdrop() {
         <rect x="-200" y="5150" width="2200" height="542" fill="url(#paintBottomFade_558_109)" />
       </g>
       <defs>
+        <filter
+          id="filterBlackMid_558_109"
+          x="-520"
+          y="2848"
+          width="2760"
+          height="1860"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feGaussianBlur stdDeviation="60" />
+        </filter>
         <linearGradient
           id="paintBottomFade_558_109"
           x1="0"

@@ -46,11 +46,11 @@ export default function MultiLocation() {
       // }}
     >
       <div className="container-px">
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-16">
-          {/* Visual */}
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,440px)_1fr] lg:items-stretch lg:gap-16">
+          {/* Visual — matches the copy column's height on desktop */}
           <div
             data-reveal
-            className="will-animate aspect-[4/3] w-full rounded-[24px] border border-white/10 bg-gradient-to-b from-white to-[#eef1ef] shadow-[0_24px_60px_rgba(0,0,0,0.18)] lg:aspect-square"
+            className="will-animate aspect-[4/3] w-full rounded-[24px] border border-white/10 bg-gradient-to-b from-white to-[#eef1ef] shadow-[0_24px_60px_rgba(0,0,0,0.18)] lg:aspect-auto lg:h-full"
           />
 
           {/* Copy */}
