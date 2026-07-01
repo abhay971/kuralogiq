@@ -36,7 +36,7 @@ export default function Patients() {
   return (
     <section
       ref={root}
-      className="pt-14 pb-8 text-white md:pt-20 md:pb-10"
+      className="relative pt-14 pb-8 text-white md:pt-20 md:pb-10"
       // Background now comes from the shared <BandBackdrop /> (see Home.jsx).
       // Previous per-section gradient:
       // style={{
@@ -44,12 +44,17 @@ export default function Patients() {
       //     'linear-gradient(180deg, #2a1000 0%, #1f0e06 26%, #190d07 55%, #140b07 100%)',
       // }}
     >
+      {/* Guide line continuing from FrontDesk into this section, ending above the heading */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
+        <div className="h-14 w-[3px] bg-gradient-to-b from-white to-transparent md:h-20" />
+      </div>
+
       <div className="container-px">
         {/* Heading */}
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
           <h2
             data-reveal
-            className="will-animate font-display text-h2 leading-[1.05] text-balance"
+            className="will-animate font-display text-h2 leading-[1.05] text-balance lg:whitespace-nowrap"
           >
             Patients who book, show up, and come back.
           </h2>

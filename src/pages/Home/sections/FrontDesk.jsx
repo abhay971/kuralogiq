@@ -180,14 +180,17 @@ export default function FrontDesk() {
           </Button>
           <span aria-hidden="true" className="hidden h-px w-24 bg-ink/15 sm:block" />
         </div>
+      </div>
 
-        {/* Vertical guide line descending through the warm transition band (Figma).
-            Strongest in the mid-band (visible over the orange); fades at the
-            near-white top and the dark bottom. */}
-        <div
-          aria-hidden="true"
-          className="-mt-6 h-[28rem] w-[2px] bg-gradient-to-b from-white/40 via-white/95 to-transparent md:h-[34rem]"
-        />
+      {/* Vertical guide line down the middle of the warm transition band. Anchored
+          to the section bottom so it meets the Patients section's line segment,
+          reading as one continuous line. Faint at the light top → strong over the
+          orange → full white at the dark bottom. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center"
+      >
+        <div className="h-[30rem] w-[3px] bg-gradient-to-b from-white/20 via-white/90 to-white md:h-[36rem]" />
       </div>
     </section>
   )
