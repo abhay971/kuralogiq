@@ -46,7 +46,7 @@ export default function MultiLocation() {
       // }}
     >
       <div className="container-px">
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-16">
           {/* Visual */}
           <div
             data-reveal
