@@ -22,26 +22,9 @@ export default function FinalCtaBackdrop() {
           transform="matrix(1 0 0 -1 -4 1271)"
           fill="url(#paint0_linear_558_139)"
         />
-        <g filter="url(#filter0_f_558_139)" style={{ mixBlendMode: 'plus-lighter' }}>
-          <ellipse
-            cx="186.606"
-            cy="342.787"
-            rx="186.606"
-            ry="342.787"
-            transform="matrix(0.977602 0.210464 0.210464 -0.977602 -283 754.452)"
-            fill="white"
-          />
-        </g>
-        <g filter="url(#filter1_f_558_139)" style={{ mixBlendMode: 'plus-lighter' }}>
-          <ellipse
-            cx="1756.57"
-            cy="458.617"
-            rx="186.606"
-            ry="342.787"
-            transform="rotate(167.85 1756.57 458.617)"
-            fill="white"
-          />
-        </g>
+        {/* SVG plus-lighter side glows removed — they rendered a vertical seam
+            in Safari (clipped-filter/blend artifact). The corner glow is now
+            recreated with CSS in FinalCta.jsx, which is browser-consistent. */}
         {/* Top band kept from the original, but filled with the page bg #F5F5F5
             (normal blend) instead of plus-lighter white — so the top resolves to
             #f5f5f5 and there's no bright seam against the section above. */}

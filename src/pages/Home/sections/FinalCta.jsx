@@ -41,6 +41,18 @@ export default function FinalCta() {
       // }}
     >
       <FinalCtaBackdrop />
+      {/* Corner glows (CSS — browser-consistent, unlike the SVG plus-lighter
+          glows that produced a Safari seam). Sits over the SVG, under content. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background: [
+            'radial-gradient(46% 52% at 4% 20%, rgba(255,255,255,0.5), rgba(255,255,255,0) 70%)',
+            'radial-gradient(46% 52% at 96% 20%, rgba(255,255,255,0.5), rgba(255,255,255,0) 70%)',
+          ].join(','),
+        }}
+      />
       <div className="container-px relative z-10 flex flex-col items-center text-center">
         <h2
           data-reveal
