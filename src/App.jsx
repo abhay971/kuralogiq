@@ -5,6 +5,7 @@ import SmoothScrollProvider from '@/providers/SmoothScrollProvider'
 import Layout from '@/components/layout/Layout'
 import ScrollToTop from '@/components/transitions/ScrollToTop'
 import PageTransition from '@/components/transitions/PageTransition'
+import Splash from '@/components/transitions/Splash'
 
 export default function App() {
   const element = useRoutes(routes)
@@ -12,6 +13,7 @@ export default function App() {
 
   return (
     <SmoothScrollProvider>
+      <Splash />
       <ScrollToTop />
       <Layout>
         <Suspense fallback={null}>
